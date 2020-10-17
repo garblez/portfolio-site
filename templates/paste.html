@@ -24,4 +24,13 @@
 			<input type="submit" value="Submit">
 		</form>
 	{% endif %}
+
+	{% if files %}
+	<h3>Other pastes</h3>
+	<ul>
+		{% for file in files %}
+			<li><a href="{{url_for("paste", paste_id=file)}}">{{file}}</a></li>
+		{% endfor %}
+	</ul>
+	{% endif %}
 {% endblock %}

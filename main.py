@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 
 import secrets 
+import os
 
 
 app = Flask(__name__)
@@ -30,12 +31,15 @@ def index():
 @app.route("/paste/", methods=["GET", "POST"])
 @app.route("/paste/<paste_id>")
 def paste(paste_id=None):
+    for root, dirs, files in os.walk("paste"):
+        pasted_files = filter(lambda f: paste_id != f, files[:10])
+
     if request.method == "POST":
         # Save the paste in the form to a file
         paste_id = save_paste(request.form["paste"])
         return redirect(url_for("paste") + paste_id)
     paste = get_paste(paste_id)
-    return render_template("paste.html", paste_id=paste_id, paste=paste)
+    return render_template("paste.html", paste_id=paste_id, paste=paste, files=pasted_files)
 
 
 @app.errorhandler(404)
