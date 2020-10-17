@@ -8,10 +8,14 @@
 {% endblock %}
 
 {% block body %}
+	<div class="ui stackable two column grid container">
+	<div class="column">
 	{% if paste_id %}
 		{% if paste %}
-			<h1>Paste: {{paste_id}}</h1>
-			<p>{{paste}}</p>
+		<div class="ui segment">
+			<h4>{{paste_id}}</h4>
+			<h3>{{paste}}</h3>
+		</div>
 		{% else %}
 			<h1>There are no pastes with an id of {{paste_id}}</h1>
 			<p>Sorry about that :/</p>
@@ -19,18 +23,24 @@
 		{% endif %}
 	{% else %}
 		<h1>Create a new paste</h1>
-		<form method="POST" action="">
-			<textarea name="paste" rows="10" cols="80"></textarea>
-			<input type="submit" value="Submit">
+		<form class="ui form" method="POST" action="">
+			<textarea class="field" name="paste" rows="10" cols="80"></textarea>
+			<button class="ui button" type="submit">
+				Submit
+			</button>
 		</form>
 	{% endif %}
-
+	</div>
+	<div class="right aligned column">
 	{% if files %}
 	<h3>Other pastes</h3>
-	<ul>
+	<ul class="ui list">
 		{% for file in files %}
 			<li><a href="{{url_for("paste", paste_id=file)}}">{{file}}</a></li>
 		{% endfor %}
 	</ul>
 	{% endif %}
+	</div>
+	</div>
+
 {% endblock %}
