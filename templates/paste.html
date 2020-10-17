@@ -9,17 +9,17 @@
 {% endblock %}
 
 {% block body %}
-	<div class="ui stackable two column grid container">
-		<div class="column">
+	<div class="ui stackable grid container">
+		<div class="twelve wide column">
 		{% if paste_id %}
 			{% if paste %}
-			<div class="ui segment">
+			<div class="ui inverted segment">
 				<h4 class="ui header">{{paste_id}}</h4>
 				<h3 class="ui header">{{paste}}</h3>
 			</div>
 			{% else %}
 				<h1 class="ui header">There are no pastes with an id of {{paste_id}}</h1>
-				<p>Sorry about that :/</p>
+				<h3 class="ui header">Sorry about that :/</h3>
 				<a href="{{url_for("paste")}}">Back</a>
 			{% endif %}
 		{% else %}
@@ -34,15 +34,16 @@
 			</form>
 		{% endif %}
 		</div>
-		<div class="right aligned column">
+		<div class="two wide column">
 		{% if files %}
 		<h3>Pastes</h3>
 		<div class="ui link list">
-			{% if paste_id %}
-				<div class="active item">{{paste_id}}</div>
-			{% endif %}
 			{% for file in files %}
+			{% if paste_id and file == paste_id %}
+				<div class="active item">{{paste_id}}</div>
+			{% else %}
 				<a class="item" href="{{url_for("paste", paste_id=file)}}">{{file}}</a>
+				{% endif %}
 			{% endfor %}
 		</div>
 		{% endif %}

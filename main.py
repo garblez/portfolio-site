@@ -32,7 +32,7 @@ def index():
 @app.route("/paste/<paste_id>")
 def paste(paste_id=None):
     for root, dirs, files in os.walk("paste"):
-        pasted_files = filter(lambda f: paste_id != f, files[:10])
+        pasted_files = files[::-1]
 
     if request.method == "POST":
         # Save the paste in the form to a file
