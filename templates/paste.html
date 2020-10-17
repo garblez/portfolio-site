@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block title %}
 	{% if paste_id %}
-		Paste: {{paste_id}}
+	Paste: {{paste_id}}
+
 	{% else %}
 		Create a new paste
 	{% endif %}
@@ -9,38 +10,43 @@
 
 {% block body %}
 	<div class="ui stackable two column grid container">
-	<div class="column">
-	{% if paste_id %}
-		{% if paste %}
-		<div class="ui segment">
-			<h4>{{paste_id}}</h4>
-			<h3>{{paste}}</h3>
-		</div>
+		<div class="column">
+		{% if paste_id %}
+			{% if paste %}
+			<div class="ui segment">
+				<h4 class="ui header">{{paste_id}}</h4>
+				<h3 class="ui header">{{paste}}</h3>
+			</div>
+			{% else %}
+				<h1 class="ui header">There are no pastes with an id of {{paste_id}}</h1>
+				<p>Sorry about that :/</p>
+				<a href="{{url_for("paste")}}">Back</a>
+			{% endif %}
 		{% else %}
-			<h1>There are no pastes with an id of {{paste_id}}</h1>
-			<p>Sorry about that :/</p>
-			<a href="{{url_for("paste")}}">Back</a>
+			<h1 class="ui header">Create a new paste</h1>
+			<form class="ui form" method="POST" action="">
+				<textarea class="field" required
+					placeholder="Enter a note here"
+					name="paste" rows="10" cols="80"></textarea>
+				<button class="fluid ui button" type="submit">
+					Submit
+				</button>
+			</form>
 		{% endif %}
-	{% else %}
-		<h1>Create a new paste</h1>
-		<form class="ui form" method="POST" action="">
-			<textarea class="field" name="paste" rows="10" cols="80"></textarea>
-			<button class="ui button" type="submit">
-				Submit
-			</button>
-		</form>
-	{% endif %}
-	</div>
-	<div class="right aligned column">
-	{% if files %}
-	<h3>Other pastes</h3>
-	<ul class="ui list">
-		{% for file in files %}
-			<li><a href="{{url_for("paste", paste_id=file)}}">{{file}}</a></li>
-		{% endfor %}
-	</ul>
-	{% endif %}
-	</div>
-	</div>
+		</div>
+		<div class="right aligned column">
+		{% if files %}
+		<h3>Pastes</h3>
+		<div class="ui link list">
+			{% if paste_id %}
+				<div class="active item">{{paste_id}}</div>
+			{% endif %}
+			{% for file in files %}
+				<a class="item" href="{{url_for("paste", paste_id=file)}}">{{file}}</a>
+			{% endfor %}
+		</div>
+		{% endif %}
+		</div>
+		</div>
 
 {% endblock %}
