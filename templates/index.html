@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Paster
+{% endblock %}
+
+{% block body %}
+	<h1> Welcome to Paster - a tiny Pastebin clone!</h1>
+	<p>Enter a plaintext paste and have it saved to the server!</p>
+	<form action="/paste">
+		<label for="paste">Paste content</label><br/>
+		<textarea name="paste" rows="10" cols="80"></textarea>
+		<input type="submit" value="Submit">
+	</form>
+{% endblock %}

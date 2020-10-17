@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}
+	{% if paste_id %}
+		Paste: {{paste_id}}
+	{% else %}
+		Create a new paste
+	{% endif %}
+{% endblock %}
+
+{% block body %}
+	{% if paste_id %}
+		<h1>Paste: {{paste_id}}</h1>
+		<p>{{paste}}</p>
+	{% else %}
+		<h1>Create a new paste</h1>
+		<form method="POST" action="">
+			<textarea name="paste" rows="10" cols="80"></textarea>
+			<label for="paste">Paste content</label>
+			<input type="submit" value="Submit">
+		</form>
+	{% endif %}
+{% endblock %}
