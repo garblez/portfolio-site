@@ -9,13 +9,18 @@
 
 {% block body %}
 	{% if paste_id %}
-		<h1>Paste: {{paste_id}}</h1>
-		<p>{{paste}}</p>
+		{% if paste %}
+			<h1>Paste: {{paste_id}}</h1>
+			<p>{{paste}}</p>
+		{% else %}
+			<h1>There are no pastes with an id of {{paste_id}}</h1>
+			<p>Sorry about that :/</p>
+			<a href="{{url_for("paste")}}">Back</a>
+		{% endif %}
 	{% else %}
 		<h1>Create a new paste</h1>
 		<form method="POST" action="">
 			<textarea name="paste" rows="10" cols="80"></textarea>
-			<label for="paste">Paste content</label>
 			<input type="submit" value="Submit">
 		</form>
 	{% endif %}
