@@ -25,8 +25,7 @@ def get_paste(paste_id=None):
 
 @app.route("/")
 def index():
-    return redirect(url_for("paste"))
-
+    return render_template("index.html")
 
 @app.route("/paste/", methods=["GET", "POST"])
 @app.route("/paste/<paste_id>")
@@ -40,6 +39,11 @@ def paste(paste_id=None):
         return redirect(url_for("paste") + paste_id)
     paste = get_paste(paste_id)
     return render_template("paste.html", paste_id=paste_id, paste=paste, files=pasted_files)
+
+
+@app.route("/about/")
+def about():
+    return render_template("about.html")
 
 
 @app.errorhandler(404)
