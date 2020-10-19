@@ -12,5 +12,23 @@
   		crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 	</head>
-	<body style="margin: 1%">{% block body %}{% endblock %}</body>
+	<body>
+		<div class="ui inverted segment">
+			<div class="ui inverted menu">
+				<div class="item">
+					Pastr
+				</div>
+				<a class="item" href="#">
+					About
+				</a>
+				<div class="right menu">
+				<a class="item" href="{{url_for("paste")}}">
+					New
+				</a>
+				</div>
+			</div>
+
+		</div>
+		<div style="margin: 1%">{% block body %}{% endblock %}</div>
+	</body>
 </html>
